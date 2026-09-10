@@ -186,27 +186,26 @@ p {
 }
 
 .brand-mark {
-  width: 100vw;
-  max-width: none;
+  width: 100%;
+  max-width: 920px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-  padding: 0.1rem 0 0.2rem;
+  margin: 0 auto;
+  padding: 0.2rem 0 0.35rem;
 }
 
 .brand-mark a {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: auto;
 }
 
 .brand-mark img {
   display: block;
-  width: min(100vw - 8px, 1400px);
-  max-width: 1400px;
+  width: min(100%, 900px);
+  max-width: 900px;
   height: auto;
   margin: 0 auto;
   filter: drop-shadow(0 14px 30px rgba(18, 24, 22, 0.08));
@@ -764,14 +763,13 @@ p {
   }
 
   .brand-mark {
-    width: 100vw;
-    max-width: none;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
+    width: 100%;
+    max-width: 760px;
+    margin: 0 auto;
   }
 
   .brand-mark img {
-    width: min(100vw - 12px, 1200px);
+    width: min(100%, 760px);
   }
 
   .main-nav {
