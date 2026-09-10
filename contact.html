@@ -95,7 +95,7 @@
               </label>
             </div>
 
-            <div id="phone-time-row" class="form-row hidden">
+            <div class="form-row">
               <label>
                 <span>Preferred contact time</span>
                 <select name="preferred_contact_time" id="preferred-contact-time">
@@ -107,7 +107,7 @@
                   <option value="Any time">Any time</option>
                 </select>
               </label>
-              <small class="field-help">This is only required when you prefer to be contacted by telephone.</small>
+              <small class="field-help">Please let us know when you would prefer to be contacted.</small>
             </div>
 
             <div class="disclosure-box">
@@ -146,19 +146,15 @@
 
     <script>
       const contactMethod = document.getElementById('contact-method');
-      const phoneTimeRow = document.getElementById('phone-time-row');
+      const preferredContactTime = document.getElementById('preferred-contact-time');
       const form = document.getElementById('service-request-form');
       const status = document.getElementById('form-status');
 
       function updateContactTimingField() {
-        const shouldShow = contactMethod.value === 'Telephone';
-        phoneTimeRow.classList.toggle('hidden', !shouldShow);
-        const select = phoneTimeRow.querySelector('select');
-        if (shouldShow) {
-          select.required = true;
+        if (contactMethod.value === 'Telephone') {
+          preferredContactTime.required = true;
         } else {
-          select.required = false;
-          select.value = '';
+          preferredContactTime.required = false;
         }
       }
 

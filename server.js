@@ -113,6 +113,10 @@ app.post('/api/contact', async (req, res) => {
     });
   }
 
+  if (!preferred_contact_time) {
+    preferred_contact_time = 'No preference';
+  }
+
   const fromEmail = process.env.EMAIL_FROM;
   const toEmail = process.env.EMAIL_TO;
 
