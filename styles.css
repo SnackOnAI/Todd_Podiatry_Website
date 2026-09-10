@@ -175,7 +175,7 @@ p {
 }
 
 .brand-mark {
-  width: min(1100px, 92vw);
+  width: min(1200px, 96vw);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -727,7 +727,8 @@ p {
   }
 
   .brand-mark {
-    width: min(100%, 96vw);
+    width: 100%;
+    max-width: 100%;
   }
 
   .main-nav {
