@@ -175,7 +175,7 @@ p {
 }
 
 .brand-mark {
-  width: min(1200px, 96vw);
+  width: min(1400px, 100%);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -193,6 +193,7 @@ p {
   display: block;
   width: 100%;
   height: auto;
+  max-width: 100%;
   margin: 0 auto;
   filter: drop-shadow(0 14px 30px rgba(18, 24, 22, 0.08));
 }
