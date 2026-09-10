@@ -753,58 +753,6 @@ p {
 }
 
 @media (max-width: 760px) {
-  body,
-  p,
-  a,
-  li,
-  span,
-  label,
-  input,
-  select,
-  textarea,
-  button,
-  .button,
-  .main-nav a,
-  .lead,
-  .service-card p,
-  .process-card p,
-  .feature-panel p,
-  .coverage-grid li,
-  .contact-details li,
-  .site-footer p,
-  .site-footer a,
-  .contact-hero p,
-  .checkbox-wrap span,
-  .field-help,
-  .quote-author,
-  .mini-pill,
-  .visual-card span,
-  .stat-box span {
-    font-family: var(--font-body);
-    color: var(--muted);
-  }
-
-  h1,
-  h2,
-  h3,
-  strong,
-  .eyebrow,
-  .hero h1,
-  .section-heading h2,
-  .feature-panel h2,
-  .service-card h3,
-  .process-card h3,
-  .coverage-grid h3,
-  .cta-banner h2,
-  .contact-details h2,
-  .contact-form h2,
-  .contact-hero h1,
-  .stat-box strong,
-  .brand-mark {
-    font-family: var(--font-heading);
-    color: var(--text);
-  }
-
   .site-shell {
     padding-left: 14px;
     padding-right: 14px;
@@ -832,7 +780,6 @@ p {
   }
 
   .main-nav a {
-    color: var(--text);
     letter-spacing: 0.12em;
     font-size: 0.56rem;
   }
@@ -850,7 +797,7 @@ p {
   }
 
   .eyebrow {
-    color: var(--accent);
+    letter-spacing: 0.16em;
   }
 
   .hero h1 {
@@ -862,6 +809,15 @@ p {
     font-size: 1rem;
   }
 
+  .section-heading h2,
+  .feature-panel h2,
+  .cta-banner h2,
+  .contact-hero h1,
+  .contact-details h2,
+  .contact-form h2 {
+    letter-spacing: -0.05em;
+  }
+
   .panel,
   .service-card,
   .process-card,
@@ -871,12 +827,6 @@ p {
     background: rgba(255, 255, 255, 0.82);
     border-color: rgba(17, 157, 164, 0.1);
     box-shadow: 0 12px 32px rgba(13, 51, 64, 0.05);
-  }
-
-  .testimonial blockquote {
-    font-family: var(--font-heading);
-    font-style: italic;
-    color: var(--text);
   }
 
   .feature-split,
