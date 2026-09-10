@@ -98,13 +98,23 @@
             <div id="phone-time-row" class="form-row hidden">
               <label>
                 <span>Preferred contact time</span>
-                <input
-                  type="text"
-                  name="preferred_contact_time"
-                  placeholder="e.g. Tuesday afternoon, 2pm-4pm"
-                />
+                <select name="preferred_contact_time" id="preferred-contact-time">
+                  <option value="">Please select</option>
+                  <option value="Morning">Morning</option>
+                  <option value="Midday">Midday</option>
+                  <option value="Afternoon">Afternoon</option>
+                  <option value="Evening">Evening</option>
+                  <option value="Any time">Any time</option>
+                </select>
               </label>
               <small class="field-help">This is only required when you prefer to be contacted by telephone.</small>
+            </div>
+
+            <div class="disclosure-box">
+              <p>
+                While every effort will be made to contact you at your preferred time, this may not
+                always be possible depending on availability and call scheduling.
+              </p>
             </div>
 
             <div class="consent-row">
@@ -143,12 +153,12 @@
       function updateContactTimingField() {
         const shouldShow = contactMethod.value === 'Telephone';
         phoneTimeRow.classList.toggle('hidden', !shouldShow);
-        const input = phoneTimeRow.querySelector('input');
+        const select = phoneTimeRow.querySelector('select');
         if (shouldShow) {
-          input.required = true;
+          select.required = true;
         } else {
-          input.required = false;
-          input.value = '';
+          select.required = false;
+          select.value = '';
         }
       }
 

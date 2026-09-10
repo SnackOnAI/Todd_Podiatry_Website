@@ -12,6 +12,62 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(__dirname));
 
+function toIcsDateTime(date) {
+  const pad = (n) => String(n).padStart(2, '0');
+  return `${date.getUTCFullYear()}${pad(date.getUTCMonth() + 1)}${pad(date.getUTCDate())}T${pad(date.getUTCHours())}${pad(date.getUTCMinutes())}${pad(date.getUTCSeconds())}Z`;
+}
+
+function escapeIcs(value = '') {
+  return String(value)
+    .replace(/\\/g, '\\\\')
+    .replace(/;/g, '\\;')
+    .replace(/,/g, '\\,')
+    .replace(/\n/g, '\\n');
+}
+
+function buildFollowUpInvite({ name, telephone, email, contactMethod, preferredContactTime }) {
+  const start = new Date();
+  const end = new Date(start.getTime());
+
+  start.setDate(start.getDate() + 1);
+  start.setHours(10, 0, 0, 0);
+  end.setTime(start.getTime() + 30 * 60 * 1000);
+
+  const preferredTime = preferredContactTime || 'No preference';
+  const description = [
+    'Follow-up reminder for a new patient enquiry from Todd Podiatry.',
+    `Name: ${name}`,
+    `Telephone: ${telephone}`,
+    `Email: ${email}`,
+    `Preferred contact method: ${contactMethod}`,
+    `Preferred contact time: ${preferredTime}`,
+    '',
+    'Please contact the patient as soon as possible.',
+  ].join('\n');
+
+  return [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Todd Podiatry//EN',
+    'METHOD:REQUEST',
+    'BEGIN:VEVENT',
+    `UID:${Date.now()}-${name.replace(/\s+/g, '-').toLowerCase()}@toddpodiatry.co.uk`,
+    `DTSTAMP:${toIcsDateTime(new Date())}`,
+    `DTSTART:${toIcsDateTime(start)}`,
+    `DTEND:${toIcsDateTime(end)}`,
+    `SUMMARY:${escapeIcs(`Follow up with ${name}`)}`,
+    `DESCRIPTION:${escapeIcs(description)}`,
+    `LOCATION:${escapeIcs('Phone / Email follow-up')}`,
+    'BEGIN:VALARM',
+    'TRIGGER:-PT15M',
+    'ACTION:DISPLAY',
+    `DESCRIPTION:${escapeIcs(`Contact ${name} about their enquiry`)}`,
+    'END:VALARM',
+    'END:VEVENT',
+    'END:VCALENDAR',
+  ].join('\r\n');
+}
+
 async function sendTelegramMessage(messageText) {
   if (!telegramBotToken || !telegramChatId) {
     return;
@@ -50,6 +106,13 @@ app.post('/api/contact', async (req, res) => {
     });
   }
 
+  if (contact_method === 'Telephone' && !preferred_contact_time) {
+    return res.status(400).json({
+      success: false,
+      message: 'Please choose a preferred contact time when you want to be contacted by telephone.',
+    });
+  }
+
   const fromEmail = process.env.EMAIL_FROM;
   const toEmail = process.env.EMAIL_TO;
 
@@ -68,6 +131,14 @@ app.post('/api/contact', async (req, res) => {
     },
   });
 
+  const calendarInvite = buildFollowUpInvite({
+    name,
+    telephone,
+    email,
+    contactMethod: contact_method,
+    preferredContactTime: preferred_contact_time,
+  });
+
   const mailOptions = {
     from: `Todd Podiatry Contact Form <${fromEmail}>`,
     to: toEmail,
@@ -84,7 +155,15 @@ app.post('/api/contact', async (req, res) => {
       message,
       '',
       'Consent given: Yes',
+      '',
+      'Calendar reminder attached: follow up with this patient.',
     ].join('\n'),
+    attachments: [
+      {
+        filename: 'todd-podiatry-follow-up.ics',
+        content: calendarInvite,
+      },
+    ],
   };
 
   try {
