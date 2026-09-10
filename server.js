@@ -26,20 +26,28 @@ function escapeIcs(value = '') {
 }
 
 function buildFollowUpInvite({ name, telephone, email, contactMethod, preferredContactTime }) {
-  const start = new Date();
-  const end = new Date(start.getTime());
+  const now = new Date();
+  const start = new Date(now);
+  const end = new Date(now);
 
   const timeMap = {
-    Morning: { hours: 9, minutes: 30, label: 'Morning' },
-    Midday: { hours: 12, minutes: 30, label: 'Midday' },
-    Afternoon: { hours: 15, minutes: 0, label: 'Afternoon' },
-    Evening: { hours: 18, minutes: 30, label: 'Evening' },
-    'Any time': { hours: 11, minutes: 0, label: 'Any time' },
+    Morning: { hours: 9, minutes: 30 },
+    Midday: { hours: 12, minutes: 30 },
+    Afternoon: { hours: 15, minutes: 0 },
+    Evening: { hours: 18, minutes: 30 },
+    'Any time': { hours: 11, minutes: 0 },
   };
 
   const match = timeMap[preferredContactTime] || timeMap['Any time'];
+  const candidateStart = new Date(now);
+  candidateStart.setHours(match.hours, match.minutes, 0, 0);
 
-  start.setDate(start.getDate() + 1);
+  if (now >= candidateStart) {
+    start.setDate(now.getDate() + 1);
+  } else {
+    start.setDate(now.getDate());
+  }
+
   start.setHours(match.hours, match.minutes, 0, 0);
   end.setTime(start.getTime() + 30 * 60 * 1000);
 
