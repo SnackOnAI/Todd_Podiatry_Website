@@ -29,8 +29,9 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Manrope", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   color: var(--text);
+  letter-spacing: -0.01em;
   background:
     radial-gradient(circle at top left, rgba(184, 147, 92, 0.14), transparent 18%),
     radial-gradient(circle at top right, rgba(35, 79, 72, 0.08), transparent 20%),
@@ -77,6 +78,9 @@ button:hover,
   background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 52%, #285953 100%);
   color: #fff;
   box-shadow: 0 18px 34px rgba(19, 45, 42, 0.18), 0 0 0 1px rgba(182, 139, 95, 0.22);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
 }
 
 .button.secondary,
@@ -84,6 +88,7 @@ button:hover,
   background: rgba(35, 79, 72, 0.04);
   color: var(--text);
   border: 1px solid rgba(24, 61, 57, 0.14);
+  letter-spacing: 0.02em;
 }
 
 input,
@@ -125,13 +130,15 @@ h1,
 h2,
 h3,
 strong {
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
   margin: 0;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
+  font-weight: 600;
 }
 
 p {
   margin: 0;
+  line-height: 1.75;
 }
 
 .hidden {
@@ -157,15 +164,15 @@ p {
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
   gap: 0.45rem;
-  padding: 0.35rem 0.6rem;
+  padding: 0.45rem 0.8rem;
   margin-bottom: 1.1rem;
-  background: rgba(255, 255, 255, 0.82);
+  background: rgba(255, 255, 255, 0.9);
   border: 1px solid rgba(28, 42, 42, 0.07);
   box-shadow: 0 18px 38px rgba(17, 29, 27, 0.06);
 }
 
 .brand-mark {
-  width: min(180px, 22vw);
+  width: min(240px, 28vw);
   justify-self: center;
   display: flex;
   justify-content: center;
@@ -178,6 +185,11 @@ p {
   align-items: center;
   justify-content: center;
   width: 100%;
+}
+
+.brand-mark img {
+  width: 100%;
+  height: auto;
 }
 
 .main-nav {
@@ -200,7 +212,9 @@ p {
   text-decoration: none;
   padding: 0.45rem 0.15rem;
   position: relative;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.04em;
+  font-size: 0.87rem;
+  text-transform: uppercase;
 }
 
 .main-nav a::after {
@@ -231,13 +245,15 @@ p {
   padding: clamp(2rem, 3vw, 3.3rem);
   overflow: hidden;
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.86), rgba(247, 241, 234, 0.96));
+    linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(247, 241, 234, 0.96));
+  border: 1px solid rgba(30, 48, 47, 0.08);
 }
 
 .hero-copy {
   display: grid;
   align-content: center;
   gap: 1rem;
+  max-width: 650px;
 }
 
 .eyebrow {
@@ -389,8 +405,8 @@ p {
 }
 
 .section-heading h2 {
-  font-size: clamp(2.5rem, 3vw, 3.8rem);
-  line-height: 1.02;
+  font-size: clamp(2.8rem, 3vw, 4.1rem);
+  line-height: 0.96;
   letter-spacing: -0.05em;
   max-width: 18ch;
 }
@@ -419,6 +435,7 @@ p {
   border-radius: 22px;
   box-shadow: 0 14px 22px rgba(27, 34, 33, 0.04);
   transition: transform 180ms ease, box-shadow 180ms ease;
+  border-top: 3px solid rgba(182, 139, 95, 0.35);
 }
 
 .service-card:hover,
@@ -571,15 +588,16 @@ p {
 }
 
 .contact-hero h1 {
-  font-size: clamp(2.4rem, 5vw, 3.8rem);
-  line-height: 1.04;
+  font-size: clamp(3rem, 5vw, 4.5rem);
+  line-height: 0.96;
   margin: 0.2rem 0 0.7rem;
 }
 
 .contact-hero p {
   color: var(--muted);
   max-width: 60ch;
-  line-height: 1.7;
+  line-height: 1.75;
+  font-size: 1.04rem;
 }
 
 .contact-grid {
@@ -591,6 +609,7 @@ p {
 .contact-details h2,
 .contact-form h2 {
   margin-bottom: 1rem;
+  font-size: clamp(2.2rem, 3vw, 3rem);
 }
 
 .contact-details ul {
@@ -696,7 +715,7 @@ p {
   }
 
   .brand-mark {
-    width: min(170px, 52vw);
+    width: min(210px, 58vw);
     justify-self: center;
   }
 
