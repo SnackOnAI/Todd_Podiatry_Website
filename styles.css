@@ -1,21 +1,24 @@
 :root {
-  --bg-1: #f7f1ea;
-  --bg-2: #e9ddd0;
-  --panel: rgba(255, 255, 255, 0.92);
+  --bg-1: #f8fafc;
+  --bg-2: #f4f7f6;
+  --panel: rgba(255, 255, 255, 0.85);
   --panel-strong: #ffffff;
-  --line: rgba(19, 46, 43, 0.08);
-  --text: #1d2d2b;
-  --muted: #566563;
-  --accent: #1d3f3d;
-  --accent-dark: #112d2a;
-  --accent-soft: rgba(29, 63, 61, 0.08);
-  --highlight: #21494a;
+  --line: rgba(17, 157, 164, 0.12);
+  --text: #0d3340;
+  --muted: #475569;
+  --accent: #119da4;
+  --accent-strong: #29b6af;
+  --accent-dark: #0d3340;
+  --accent-soft: rgba(17, 157, 164, 0.1);
+  --highlight: #124b5f;
   --gold: #b99363;
   --gold-soft: rgba(185, 147, 99, 0.14);
-  --shadow: 0 30px 70px rgba(17, 29, 27, 0.08);
-  --radius-xl: 30px;
-  --radius-lg: 22px;
+  --shadow: 0 10px 30px -10px rgba(13, 51, 64, 0.08);
+  --radius-xl: 24px;
+  --radius-lg: 18px;
   --container: 1220px;
+  --font-heading: "Plus Jakarta Sans", "Manrope", "Segoe UI", sans-serif;
+  --font-body: "Inter", "Segoe UI", sans-serif;
 }
 
 * {
@@ -29,13 +32,15 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  font-family: "Manrope", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
   color: var(--text);
   letter-spacing: -0.01em;
   background:
-    radial-gradient(circle at top left, rgba(184, 147, 92, 0.14), transparent 18%),
-    radial-gradient(circle at top right, rgba(35, 79, 72, 0.08), transparent 20%),
-    linear-gradient(180deg, #faf6f2 0%, #f2eee8 100%);
+    radial-gradient(circle at top left, rgba(17, 157, 164, 0.08), transparent 18%),
+    radial-gradient(circle at top right, rgba(41, 182, 175, 0.07), transparent 20%),
+    linear-gradient(180deg, #f8fafc 0%, #f4f7f6 100%);
 }
 
 img {
@@ -58,7 +63,7 @@ button,
   font-weight: 700;
   cursor: pointer;
   letter-spacing: 0.01em;
-  transition: transform 160ms ease, box-shadow 160ms ease, opacity 160ms ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
 }
 
 button:hover,
@@ -75,19 +80,25 @@ button:hover,
 }
 
 .button.primary {
-  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 52%, #254f4d 100%);
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%);
   color: #fff;
-  box-shadow: 0 18px 34px rgba(19, 45, 42, 0.18), 0 0 0 1px rgba(185, 147, 99, 0.22);
+  box-shadow: 0 10px 24px rgba(17, 157, 164, 0.25);
   letter-spacing: 0.04em;
   text-transform: uppercase;
   font-size: 0.78rem;
 }
 
+.button.primary:hover,
+.button-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(17, 157, 164, 0.3);
+}
+
 .button.secondary,
 .button-secondary {
-  background: rgba(29, 63, 61, 0.04);
+  background: transparent;
   color: var(--text);
-  border: 1px solid rgba(29, 63, 61, 0.14);
+  border: 1.5px solid rgba(13, 51, 64, 0.2);
   letter-spacing: 0.02em;
 }
 
@@ -130,10 +141,10 @@ h1,
 h2,
 h3,
 strong {
-  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  font-family: var(--font-heading);
   margin: 0;
   letter-spacing: -0.04em;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 p {
@@ -152,11 +163,11 @@ p {
 }
 
 .panel {
-  background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(248,243,238,0.9));
-  border: 1px solid rgba(30, 48, 47, 0.08);
+  background: var(--panel);
+  border: 1px solid rgba(255, 255, 255, 0.65);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
 }
 
 .site-header {
@@ -166,10 +177,10 @@ p {
   align-items: center;
   gap: 0.5rem;
   width: 100%;
-  padding: 0.2rem 0.5rem 0.55rem;
+  padding: 0.5rem 0.7rem 0.7rem;
   margin-bottom: 1rem;
-  background: rgba(255, 255, 255, 0.84);
-  border: 1px solid rgba(29, 63, 61, 0.05);
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(17, 157, 164, 0.08);
   box-shadow: none;
   text-align: center;
 }
@@ -225,6 +236,10 @@ p {
   opacity: 0.88;
 }
 
+.main-nav a:hover {
+  color: var(--accent);
+}
+
 .main-nav a::after {
   content: "";
   position: absolute;
@@ -253,8 +268,8 @@ p {
   padding: clamp(1.9rem, 2.5vw, 3.1rem);
   overflow: hidden;
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(247, 241, 234, 0.96));
-  border: 1px solid rgba(30, 48, 47, 0.08);
+    linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(244, 247, 246, 0.96));
+  border: 1px solid rgba(17, 157, 164, 0.1);
 }
 
 .hero-copy {
@@ -265,7 +280,7 @@ p {
 }
 
 .eyebrow {
-  color: var(--accent-dark);
+  color: var(--accent);
   letter-spacing: 0.18em;
   text-transform: uppercase;
   font-weight: 800;
@@ -301,8 +316,8 @@ p {
 }
 
 .trust-list li {
-  background: rgba(35, 79, 72, 0.05);
-  border: 1px solid rgba(24, 61, 57, 0.11);
+  background: rgba(17, 157, 164, 0.08);
+  border: 1px solid rgba(17, 157, 164, 0.12);
   padding: 0.72rem 1rem;
   border-radius: 999px;
   font-weight: 700;
@@ -323,9 +338,10 @@ p {
   gap: 1rem;
   padding: 1rem 1.1rem;
   border-radius: 22px;
-  background: rgba(255, 255, 255, 0.72);
-  border: 1px solid rgba(20, 78, 109, 0.08);
-  box-shadow: 0 12px 20px rgba(23, 51, 59, 0.04);
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(17, 157, 164, 0.1);
+  box-shadow: 0 12px 20px rgba(13, 51, 64, 0.04);
+  backdrop-filter: blur(12px);
 }
 
 .visual-card.accent {
@@ -438,18 +454,18 @@ p {
 
 .service-card,
 .process-card {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(249, 244, 238, 0.96));
-  border: 1px solid rgba(29, 63, 61, 0.08);
-  border-radius: 22px;
-  box-shadow: 0 14px 22px rgba(27, 34, 33, 0.04);
-  transition: transform 180ms ease, box-shadow 180ms ease;
-  border-top: 3px solid rgba(185, 147, 99, 0.38);
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(17, 157, 164, 0.1);
+  border-radius: 18px;
+  box-shadow: 0 12px 32px rgba(13, 51, 64, 0.05);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+  border-top: 3px solid rgba(17, 157, 164, 0.35);
 }
 
 .service-card:hover,
 .process-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 18px 28px rgba(16, 67, 96, 0.08);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(13, 51, 64, 0.1);
 }
 
 .service-card h3,
@@ -478,7 +494,7 @@ p {
   width: 54px;
   height: 54px;
   border-radius: 16px;
-  background: linear-gradient(135deg, rgba(24, 61, 57, 0.12), rgba(184, 147, 92, 0.14));
+  background: linear-gradient(135deg, rgba(17, 157, 164, 0.14), rgba(41, 182, 175, 0.08));
   color: var(--accent-dark);
   font-weight: 800;
   margin-bottom: 0.95rem;
@@ -524,7 +540,9 @@ p {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
   padding: 1.4rem;
-  background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(246, 240, 233, 0.94));
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(17, 157, 164, 0.1);
+  box-shadow: var(--shadow);
 }
 
 .coverage-disclaimer {
@@ -542,13 +560,26 @@ p {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
+}
+
+.coverage-grid li {
+  display: inline-flex;
+  padding: 0.5rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(17, 157, 164, 0.12);
+  color: var(--text);
+  font-weight: 600;
 }
 
 .testimonial {
   margin-top: 2.2rem;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(233, 240, 236, 0.95));
+  border-left: 4px solid var(--accent);
+  border-radius: 18px;
 }
 
 .testimonial blockquote {
@@ -556,6 +587,8 @@ p {
   font-size: clamp(1.2rem, 2vw, 1.8rem);
   line-height: 1.5;
   color: var(--text);
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
 }
 
 .quote-author {
