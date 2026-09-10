@@ -759,21 +759,22 @@ p {
   }
 
   .site-header {
-    padding: 0.2rem 0.4rem 0.7rem;
+    padding: 0.4rem 0.5rem 0.8rem;
   }
 
   .brand-mark {
     width: 100%;
-    max-width: 560px;
+    max-width: 540px;
     margin: 0 auto;
   }
 
   .brand-mark img {
-    width: min(100%, 560px);
+    width: min(100%, 540px);
   }
 
   .main-nav {
     gap: 0.55rem 1rem;
+    padding-top: 0.15rem;
   }
 
   .main-nav a {
@@ -781,7 +782,25 @@ p {
     font-size: 0.56rem;
   }
 
-  .hero,
+  .hero {
+    padding: 1.2rem 1rem 1.3rem;
+    gap: 1rem;
+  }
+
+  .hero-copy {
+    justify-items: center;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.6rem, 11vw, 3.9rem);
+    line-height: 0.96;
+  }
+
+  .lead {
+    font-size: 1rem;
+  }
+
   .feature-split,
   .service-grid,
   .process-grid,
@@ -801,6 +820,15 @@ p {
   .cta-row {
     display: grid;
     width: 100%;
+  }
+
+  .trust-list {
+    justify-content: center;
+  }
+
+  .visual-card {
+    padding: 0.85rem 0.9rem;
+    border-radius: 18px;
   }
 
   .visual-card.accent {
