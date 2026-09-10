@@ -118,9 +118,13 @@ app.post('/api/contact', async (req, res) => {
   }
 
   const fromEmail = process.env.EMAIL_FROM;
-  const toEmail = process.env.EMAIL_TO;
+  const normalizedPassword = String(process.env.EMAIL_PASSWORD || '').replace(/\s+/g, '');
+  const toEmail = (process.env.EMAIL_TO || '')
+    .split(',')
+    .map((email) => email.trim())
+    .filter(Boolean);
 
-  if (!fromEmail || !toEmail) {
+  if (!fromEmail || !toEmail.length || !normalizedPassword) {
     return res.status(500).json({
       success: false,
       message: 'Email configuration is missing on the server.',
@@ -131,7 +135,7 @@ app.post('/api/contact', async (req, res) => {
     service: 'gmail',
     auth: {
       user: fromEmail,
-      pass: process.env.EMAIL_PASSWORD,
+      pass: normalizedPassword,
     },
   });
 
