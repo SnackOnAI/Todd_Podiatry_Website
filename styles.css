@@ -760,6 +760,8 @@ p {
 
   .site-header {
     padding: 0.4rem 0.5rem 0.8rem;
+    background: rgba(255, 255, 255, 0.86);
+    border-color: rgba(17, 157, 164, 0.1);
   }
 
   .brand-mark {
@@ -778,6 +780,7 @@ p {
   }
 
   .main-nav a {
+    color: var(--text);
     letter-spacing: 0.12em;
     font-size: 0.56rem;
   }
@@ -785,6 +788,8 @@ p {
   .hero {
     padding: 1.2rem 1rem 1.3rem;
     gap: 1rem;
+    background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(244,247,246,0.96));
+    border-color: rgba(17, 157, 164, 0.12);
   }
 
   .hero-copy {
@@ -792,13 +797,57 @@ p {
     text-align: center;
   }
 
+  .eyebrow,
+  .hero h1,
+  .section-heading h2,
+  .feature-panel h2,
+  .service-card h3,
+  .process-card h3,
+  .coverage-grid h3,
+  .cta-banner h2,
+  .contact-details h2,
+  .contact-form h2,
+  .contact-hero h1,
+  .stat-box strong {
+    color: var(--text);
+  }
+
   .hero h1 {
     font-size: clamp(2.6rem, 11vw, 3.9rem);
     line-height: 0.96;
   }
 
+  .lead,
+  .service-card p,
+  .process-card p,
+  .feature-panel p,
+  .coverage-grid li,
+  .contact-details li,
+  .site-footer p,
+  .site-footer a,
+  .contact-hero p,
+  .checkbox-wrap span,
+  .field-help,
+  .quote-author,
+  .mini-pill,
+  .visual-card span,
+  .stat-box span {
+    color: var(--muted);
+  }
+
   .lead {
     font-size: 1rem;
+  }
+
+  .panel,
+  .service-card,
+  .process-card,
+  .coverage-grid,
+  .testimonial,
+  .visual-card {
+    background: rgba(255, 255, 255, 0.82);
+    border-color: rgba(17, 157, 164, 0.1);
+    box-shadow: 0 12px 32px rgba(13, 51, 64, 0.05);
   }
 
   .feature-split,
@@ -837,6 +886,7 @@ p {
 
   .cta-banner {
     padding: 1.2rem;
+    background: linear-gradient(135deg, rgba(255,255,255,0.96), rgba(245,239,232,0.96));
   }
 
   .site-footer {
