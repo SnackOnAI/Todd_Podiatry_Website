@@ -187,7 +187,7 @@ p {
 
 .brand-mark {
   width: 100%;
-  max-width: 520px;
+  max-width: 360px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -204,8 +204,8 @@ p {
 
 .brand-mark img {
   display: block;
-  width: min(100%, 480px);
-  max-width: 480px;
+  width: min(100%, 320px);
+  max-width: 320px;
   height: auto;
   margin: 0 auto;
   filter: drop-shadow(0 14px 30px rgba(18, 24, 22, 0.08));
@@ -818,12 +818,12 @@ p {
 
   .brand-mark {
     width: 100%;
-    max-width: 420px;
+    max-width: 260px;
     margin: 0 auto;
   }
 
   .brand-mark img {
-    width: min(100%, 420px);
+    width: min(100%, 260px);
   }
 
   .main-nav {
