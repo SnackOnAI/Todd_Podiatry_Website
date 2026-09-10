@@ -29,8 +29,18 @@ function buildFollowUpInvite({ name, telephone, email, contactMethod, preferredC
   const start = new Date();
   const end = new Date(start.getTime());
 
+  const timeMap = {
+    Morning: { hours: 9, minutes: 30, label: 'Morning' },
+    Midday: { hours: 12, minutes: 30, label: 'Midday' },
+    Afternoon: { hours: 15, minutes: 0, label: 'Afternoon' },
+    Evening: { hours: 18, minutes: 30, label: 'Evening' },
+    'Any time': { hours: 11, minutes: 0, label: 'Any time' },
+  };
+
+  const match = timeMap[preferredContactTime] || timeMap['Any time'];
+
   start.setDate(start.getDate() + 1);
-  start.setHours(10, 0, 0, 0);
+  start.setHours(match.hours, match.minutes, 0, 0);
   end.setTime(start.getTime() + 30 * 60 * 1000);
 
   const preferredTime = preferredContactTime || 'No preference';
