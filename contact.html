@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Todd Podiatry | Request a Home Visit</title>
+    <meta
+      name="description"
+      content="Request a mobile podiatry appointment in Edinburgh or Fife. Complete the form and Todd Podiatry will respond by email or phone."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="site-shell contact-page-shell">
+      <header class="site-header panel">
+        <div class="brand-mark">
+          <a href="index.html" aria-label="Todd Podiatry home page">
+            <img src="logo.png" alt="Todd Podiatry logo" />
+          </a>
+        </div>
+
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="index.html#services">Services</a>
+          <a href="index.html#coverage">Coverage</a>
+          <a href="index.html#process">How it works</a>
+          <a href="contact.html" aria-current="page">Contact</a>
+        </nav>
+
+        <a class="button primary" href="contact.html">Request a call</a>
+      </header>
+
+      <main class="contact-page">
+        <section class="contact-hero panel">
+          <div>
+            <p class="eyebrow">Request a service</p>
+            <h1>Contact Todd Podiatry</h1>
+            <p>
+              Tell me a little about your needs and I will get back to you by your preferred
+              method of contact.
+            </p>
+          </div>
+        </section>
+
+        <section class="contact-grid">
+          <div class="contact-details panel">
+            <h2>Get in touch</h2>
+            <ul>
+              <li><strong>Location:</strong> Edinburgh and Fife</li>
+              <li><strong>Service type:</strong> Mobile podiatry visits</li>
+              <li><strong>Availability:</strong> Flexible appointments</li>
+              <li><strong>Response:</strong> By your preferred contact method</li>
+            </ul>
+          </div>
+
+          <form id="service-request-form" class="contact-form panel" novalidate>
+            <div class="form-row two-up">
+              <label>
+                <span>Full name</span>
+                <input type="text" name="name" placeholder="Your name" required />
+              </label>
+
+              <label>
+                <span>Telephone</span>
+                <input type="tel" name="telephone" placeholder="Your phone number" required />
+              </label>
+            </div>
+
+            <div class="form-row two-up">
+              <label>
+                <span>Email address</span>
+                <input type="email" name="email" placeholder="Your email" required />
+              </label>
+
+              <label>
+                <span>How would you like to be contacted?</span>
+                <select name="contact_method" id="contact-method" required>
+                  <option value="">Please select</option>
+                  <option value="Telephone">Telephone</option>
+                  <option value="Email">Email</option>
+                  <option value="Text message">Text message</option>
+                  <option value="No preference">No preference</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="form-row">
+              <label>
+                <span>Message</span>
+                <textarea
+                  name="message"
+                  rows="5"
+                  placeholder="Please tell me about the treatment you require, your location and any appointment preferences."
+                  required
+                ></textarea>
+              </label>
+            </div>
+
+            <div id="phone-time-row" class="form-row hidden">
+              <label>
+                <span>Preferred contact time</span>
+                <input
+                  type="text"
+                  name="preferred_contact_time"
+                  placeholder="e.g. Tuesday afternoon, 2pm-4pm"
+                />
+              </label>
+              <small class="field-help">This is only required when you prefer to be contacted by telephone.</small>
+            </div>
+
+            <div class="consent-row">
+              <label class="checkbox-wrap">
+                <input type="checkbox" name="consent" required />
+                <span>
+                  I consent to Todd Podiatry using the details provided to respond to my enquiry,
+                  arrange relevant contact, and confirm treatment arrangements. I understand the
+                  information will be kept private and used only for this purpose.
+                </span>
+              </label>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="button primary">Send enquiry</button>
+            </div>
+
+            <p id="form-status" class="form-status" aria-live="polite"></p>
+          </form>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <p>Todd Podiatry</p>
+        <p>Mobile podiatry services across Edinburgh and Fife.</p>
+        <a href="contact.html">Request a service</a>
+      </footer>
+    </div>
+
+    <script>
+      const contactMethod = document.getElementById('contact-method');
+      const phoneTimeRow = document.getElementById('phone-time-row');
+      const form = document.getElementById('service-request-form');
+      const status = document.getElementById('form-status');
+
+      function updateContactTimingField() {
+        const shouldShow = contactMethod.value === 'Telephone';
+        phoneTimeRow.classList.toggle('hidden', !shouldShow);
+        const input = phoneTimeRow.querySelector('input');
+        if (shouldShow) {
+          input.required = true;
+        } else {
+          input.required = false;
+          input.value = '';
+        }
+      }
+
+      contactMethod.addEventListener('change', updateContactTimingField);
+
+      form.addEventListener('submit', async function (event) {
+        event.preventDefault();
+
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        const submitButton = form.querySelector('button[type="submit"]');
+        const originalText = submitButton.textContent;
+        const formData = new FormData(form);
+
+        submitButton.disabled = true;
+        submitButton.textContent = 'Sending...';
+        status.textContent = '';
+
+        try {
+          const response = await fetch('/api/contact', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(Object.fromEntries(formData.entries())),
+          });
+
+          const result = await response.json();
+
+          if (!response.ok || !result.success) {
+            throw new Error(result.message || 'Unable to send request.');
+          }
+
+          status.textContent = result.message || 'Your enquiry was sent successfully.';
+          form.reset();
+          updateContactTimingField();
+        } catch (error) {
+          status.textContent = error.message || 'There was a problem sending the form. Please try again later.';
+        } finally {
+          submitButton.disabled = false;
+          submitButton.textContent = originalText;
+        }
+      });
+
+      updateContactTimingField();
+    </script>
+  </body>
+</html>
