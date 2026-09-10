@@ -753,6 +753,58 @@ p {
 }
 
 @media (max-width: 760px) {
+  body,
+  p,
+  a,
+  li,
+  span,
+  label,
+  input,
+  select,
+  textarea,
+  button,
+  .button,
+  .main-nav a,
+  .lead,
+  .service-card p,
+  .process-card p,
+  .feature-panel p,
+  .coverage-grid li,
+  .contact-details li,
+  .site-footer p,
+  .site-footer a,
+  .contact-hero p,
+  .checkbox-wrap span,
+  .field-help,
+  .quote-author,
+  .mini-pill,
+  .visual-card span,
+  .stat-box span {
+    font-family: var(--font-body);
+    color: var(--muted);
+  }
+
+  h1,
+  h2,
+  h3,
+  strong,
+  .eyebrow,
+  .hero h1,
+  .section-heading h2,
+  .feature-panel h2,
+  .service-card h3,
+  .process-card h3,
+  .coverage-grid h3,
+  .cta-banner h2,
+  .contact-details h2,
+  .contact-form h2,
+  .contact-hero h1,
+  .stat-box strong,
+  .brand-mark {
+    font-family: var(--font-heading);
+    color: var(--text);
+  }
+
   .site-shell {
     padding-left: 14px;
     padding-right: 14px;
@@ -797,42 +849,13 @@ p {
     text-align: center;
   }
 
-  .eyebrow,
-  .hero h1,
-  .section-heading h2,
-  .feature-panel h2,
-  .service-card h3,
-  .process-card h3,
-  .coverage-grid h3,
-  .cta-banner h2,
-  .contact-details h2,
-  .contact-form h2,
-  .contact-hero h1,
-  .stat-box strong {
-    color: var(--text);
+  .eyebrow {
+    color: var(--accent);
   }
 
   .hero h1 {
     font-size: clamp(2.6rem, 11vw, 3.9rem);
     line-height: 0.96;
-  }
-
-  .lead,
-  .service-card p,
-  .process-card p,
-  .feature-panel p,
-  .coverage-grid li,
-  .contact-details li,
-  .site-footer p,
-  .site-footer a,
-  .contact-hero p,
-  .checkbox-wrap span,
-  .field-help,
-  .quote-author,
-  .mini-pill,
-  .visual-card span,
-  .stat-box span {
-    color: var(--muted);
   }
 
   .lead {
@@ -848,6 +871,12 @@ p {
     background: rgba(255, 255, 255, 0.82);
     border-color: rgba(17, 157, 164, 0.1);
     box-shadow: 0 12px 32px rgba(13, 51, 64, 0.05);
+  }
+
+  .testimonial blockquote {
+    font-family: var(--font-heading);
+    font-style: italic;
+    color: var(--text);
   }
 
   .feature-split,
