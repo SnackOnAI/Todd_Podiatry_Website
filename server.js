@@ -1,10 +1,12 @@
 require('dotenv').config();
+
 const express = require('express');
 const nodemailer = require('nodemailer');
 const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
 const telegramBotToken = process.env.TELEGRAM_BOT_TOKEN;
 const telegramChatId = process.env.TELEGRAM_CHAT_ID;
 
@@ -14,7 +16,12 @@ app.use(express.static(__dirname));
 
 function toIcsDateTime(date) {
   const pad = (n) => String(n).padStart(2, '0');
-  return `${date.getUTCFullYear()}${pad(date.getUTCMonth() + 1)}${pad(date.getUTCDate())}T${pad(date.getUTCHours())}${pad(date.getUTCMinutes())}${pad(date.getUTCSeconds())}Z`;
+
+  return `${date.getUTCFullYear()}${pad(date.getUTCMonth() + 1)}${pad(
+    date.getUTCDate()
+  )}T${pad(date.getUTCHours())}${pad(date.getUTCMinutes())}${pad(
+    date.getUTCSeconds()
+  )}Z`;
 }
 
 function escapeIcs(value = '') {
@@ -25,7 +32,13 @@ function escapeIcs(value = '') {
     .replace(/\n/g, '\\n');
 }
 
-function buildFollowUpInvite({ name, telephone, email, contactMethod, preferredContactTime }) {
+function buildFollowUpInvite({
+  name,
+  telephone,
+  email,
+  contactMethod,
+  preferredContactTime,
+}) {
   const now = new Date();
   const start = new Date(now);
   const end = new Date(now);
@@ -38,7 +51,9 @@ function buildFollowUpInvite({ name, telephone, email, contactMethod, preferredC
     'Any time': { hours: 11, minutes: 0 },
   };
 
-  const match = timeMap[preferredContactTime] || timeMap['Any time'];
+  const match =
+    timeMap[preferredContactTime] || timeMap['Any time'];
+
   const candidateStart = new Date(now);
   candidateStart.setHours(match.hours, match.minutes, 0, 0);
 
@@ -51,7 +66,9 @@ function buildFollowUpInvite({ name, telephone, email, contactMethod, preferredC
   start.setHours(match.hours, match.minutes, 0, 0);
   end.setTime(start.getTime() + 30 * 60 * 1000);
 
-  const preferredTime = preferredContactTime || 'No preference';
+  const preferredTime =
+    preferredContactTime || 'No preference';
+
   const description = [
     'Follow-up reminder for a new patient enquiry from Todd Podiatry.',
     `Name: ${name}`,
@@ -69,7 +86,9 @@ function buildFollowUpInvite({ name, telephone, email, contactMethod, preferredC
     'PRODID:-//Todd Podiatry//EN',
     'METHOD:REQUEST',
     'BEGIN:VEVENT',
-    `UID:${Date.now()}-${name.replace(/\s+/g, '-').toLowerCase()}@toddpodiatry.co.uk`,
+    `UID:${Date.now()}-${name
+      .replace(/\s+/g, '-')
+      .toLowerCase()}@toddpodiatry.co.uk`,
     `DTSTAMP:${toIcsDateTime(new Date())}`,
     `DTSTART:${toIcsDateTime(start)}`,
     `DTEND:${toIcsDateTime(end)}`,
@@ -79,7 +98,9 @@ function buildFollowUpInvite({ name, telephone, email, contactMethod, preferredC
     'BEGIN:VALARM',
     'TRIGGER:-PT15M',
     'ACTION:DISPLAY',
-    `DESCRIPTION:${escapeIcs(`Contact ${name} about their enquiry`)}`,
+    `DESCRIPTION:${escapeIcs(
+      `Contact ${name} about their enquiry`
+    )}`,
     'END:VALARM',
     'END:VEVENT',
     'END:VCALENDAR',
@@ -88,12 +109,16 @@ function buildFollowUpInvite({ name, telephone, email, contactMethod, preferredC
 
 async function sendTelegramMessage(messageText) {
   if (!telegramBotToken || !telegramChatId) {
+    console.warn(
+      'Telegram configuration is missing; skipping Telegram notification.'
+    );
     return;
   }
 
-  const url = `https://api.telegram.org/bot${telegramBotToken}/sendMessage`;
+  const url =
+    `https://api.telegram.org/bot${telegramBotToken}/sendMessage`;
 
-  await fetch(url, {
+  const response = await fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -104,6 +129,14 @@ async function sendTelegramMessage(messageText) {
       parse_mode: 'HTML',
     }),
   });
+
+  if (!response.ok) {
+    const responseText = await response.text();
+
+    throw new Error(
+      `Telegram API returned ${response.status}: ${responseText}`
+    );
+  }
 }
 
 app.post('/api/contact', async (req, res) => {
@@ -117,35 +150,61 @@ app.post('/api/contact', async (req, res) => {
     consent,
   } = req.body || {};
 
-  if (!name || !telephone || !email || !contact_method || !message || !consent) {
+  if (
+    !name ||
+    !telephone ||
+    !email ||
+    !contact_method ||
+    !message ||
+    !consent
+  ) {
     return res.status(400).json({
       success: false,
-      message: 'Please complete all required fields and consent to the message being used.',
+      message:
+        'Please complete all required fields and consent to the message being used.',
     });
   }
 
-  if (contact_method === 'Telephone' && !preferred_contact_time) {
+  if (
+    contact_method === 'Telephone' &&
+    !preferred_contact_time
+  ) {
     return res.status(400).json({
       success: false,
-      message: 'Please choose a preferred contact time when you want to be contacted by telephone.',
+      message:
+        'Please choose a preferred contact time when you want to be contacted by telephone.',
     });
   }
 
-  if (!preferred_contact_time) {
-    preferred_contact_time = 'No preference';
-  }
+  // Do NOT assign back to the destructured const.
+  // Instead, create a new constant with the fallback value.
+  const preferredContactTime =
+    preferred_contact_time || 'No preference';
 
   const fromEmail = process.env.EMAIL_FROM;
-  const normalizedPassword = String(process.env.EMAIL_PASSWORD || '').replace(/\s+/g, '');
+
+  const normalizedPassword = String(
+    process.env.EMAIL_PASSWORD || ''
+  ).replace(/\s+/g, '');
+
   const toEmail = (process.env.EMAIL_TO || '')
     .split(',')
-    .map((email) => email.trim())
+    .map((emailAddress) => emailAddress.trim())
     .filter(Boolean);
 
-  if (!fromEmail || !toEmail.length || !normalizedPassword) {
+  if (
+    !fromEmail ||
+    !toEmail.length ||
+    !normalizedPassword
+  ) {
+    console.error(
+      'Email configuration is missing. Check EMAIL_FROM, EMAIL_TO and EMAIL_PASSWORD.'
+    );
+
     return res.status(500).json({
       success: false,
-      message: 'Email configuration is missing on the server.',
+      message:
+        'Email configuration is missing on the server.',
     });
   }
 
@@ -162,7 +221,7 @@ app.post('/api/contact', async (req, res) => {
     telephone,
     email,
     contactMethod: contact_method,
-    preferredContactTime: preferred_contact_time,
+    preferredContactTime,
   });
 
   const mailOptions = {
@@ -175,7 +234,7 @@ app.post('/api/contact', async (req, res) => {
       `Telephone: ${telephone}`,
       `Email: ${email}`,
       `Preferred contact method: ${contact_method}`,
-      `Preferred contact time: ${preferred_contact_time || 'Not specified'}`,
+      `Preferred contact time: ${preferredContactTime}`,
       '',
       'Message:',
       message,
@@ -201,7 +260,7 @@ app.post('/api/contact', async (req, res) => {
       `Telephone: ${telephone}`,
       `Email: ${email}`,
       `Preferred contact method: ${contact_method}`,
-      `Preferred contact time: ${preferred_contact_time || 'Not specified'}`,
+      `Preferred contact time: ${preferredContactTime}`,
       '',
       `<b>Message:</b> ${message.replace(/\n/g, ' ')}`,
     ].join('\n');
@@ -209,15 +268,23 @@ app.post('/api/contact', async (req, res) => {
     try {
       await sendTelegramMessage(telegramMessage);
     } catch (telegramError) {
-      console.error('Telegram send failed:', telegramError);
+      console.error(
+        'Telegram send failed:',
+        telegramError
+      );
     }
 
-    return res.json({ success: true, message: 'Your enquiry has been sent successfully.' });
+    return res.json({
+      success: true,
+      message: 'Your enquiry has been sent successfully.',
+    });
   } catch (error) {
     console.error('Email send failed:', error);
+
     return res.status(500).json({
       success: false,
-      message: 'The form could not be sent at the moment. Please try again later.',
+      message:
+        'The form could not be sent at the moment. Please try again later.',
     });
   }
 });
@@ -231,5 +298,8 @@ app.get('*', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Todd Podiatry server running on http://localhost:${PORT}`);
+  console.log(
+    `Todd Podiatry server running on http://localhost:${PORT}`
+  );
 });
+
