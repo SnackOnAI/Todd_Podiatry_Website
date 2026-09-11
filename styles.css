@@ -9,7 +9,6 @@
   --accent: #119da4;
   --accent-strong: #29b6af;
   --accent-dark: #0d3340;
-  --accent-soft: rgba(17, 157, 164, 0.1);
   --highlight: #124b5f;
   --gold: #b99363;
   --gold-soft: rgba(185, 147, 99, 0.14);
@@ -38,8 +37,16 @@ body {
   color: var(--text);
   letter-spacing: -0.01em;
   background:
-    radial-gradient(circle at top left, rgba(17, 157, 164, 0.08), transparent 18%),
-    radial-gradient(circle at top right, rgba(41, 182, 175, 0.07), transparent 20%),
+    radial-gradient(
+      circle at top left,
+      rgba(17, 157, 164, 0.08),
+      transparent 18%
+    ),
+    radial-gradient(
+      circle at top right,
+      rgba(41, 182, 175, 0.07),
+      transparent 20%
+    ),
     linear-gradient(180deg, #f8fafc 0%, #f4f7f6 100%);
 }
 
@@ -55,20 +62,30 @@ textarea {
   font: inherit;
 }
 
+
+/* =========================
+   BUTTONS
+   ========================= */
+
 button,
 .button {
   border: 0;
   border-radius: 999px;
-  padding: 1rem 1.5rem;
+  padding: 1.1rem 1.8rem;
   font-weight: 700;
   cursor: pointer;
   letter-spacing: 0.01em;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    opacity 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease;
 }
 
 button:hover,
 .button:hover {
-  transform: translateY(-1px);
+  transform: translateY(-2px);
 }
 
 .button {
@@ -80,18 +97,21 @@ button:hover,
 }
 
 .button.primary {
-  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--accent) 0%,
+    var(--accent-strong) 100%
+  );
   color: #fff;
   box-shadow: 0 10px 24px rgba(17, 157, 164, 0.25);
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  font-size: 0.78rem;
+  font-size: 0.85rem;
 }
 
-.button.primary:hover,
-.button-secondary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(17, 157, 164, 0.3);
+.button.primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 34px rgba(17, 157, 164, 0.34);
 }
 
 .button.secondary,
@@ -101,6 +121,19 @@ button:hover,
   border: 1.5px solid rgba(13, 51, 64, 0.2);
   letter-spacing: 0.02em;
 }
+
+.button.secondary:hover,
+.button-secondary:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 0 12px 28px rgba(17, 157, 164, 0.12);
+}
+
+
+/* =========================
+   FORM ELEMENTS
+   ========================= */
 
 input,
 select,
@@ -137,6 +170,11 @@ label span {
   font-weight: 600;
 }
 
+
+/* =========================
+   TYPOGRAPHY
+   ========================= */
+
 h1,
 h2,
 h3,
@@ -156,6 +194,11 @@ p {
   display: none !important;
 }
 
+
+/* =========================
+   SITE CONTAINER
+   ========================= */
+
 .site-shell {
   max-width: var(--container);
   margin: 0 auto;
@@ -169,6 +212,11 @@ p {
   box-shadow: var(--shadow);
   backdrop-filter: blur(12px);
 }
+
+
+/* =========================
+   HEADER
+   ========================= */
 
 .site-header {
   display: grid;
@@ -191,11 +239,9 @@ p {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto;
+  margin: 2px auto 8px;
   padding: 0;
   line-height: 0;
-  margin-top: 2px;
-  margin-bottom: 8px;
 }
 
 .brand-mark a {
@@ -212,9 +258,14 @@ p {
   max-width: 500px;
   height: auto;
   margin: 0;
-  transform: translateY(0);
+  transform: none;
   filter: drop-shadow(0 14px 30px rgba(18, 24, 22, 0.08));
 }
+
+
+/* =========================
+   NAVIGATION
+   ========================= */
 
 .main-nav {
   display: flex;
@@ -229,46 +280,61 @@ p {
 }
 
 .main-nav a {
+  position: relative;
+  display: inline-block;
   color: var(--text);
   font-weight: 700;
   text-decoration: none;
   padding: 0.15rem 0;
-  position: relative;
   letter-spacing: 0.15em;
   font-size: 0.62rem;
   text-transform: uppercase;
-  transition: color 180ms ease, opacity 180ms ease;
   opacity: 0.88;
+
+  transition:
+    color 180ms ease,
+    opacity 180ms ease;
 }
 
-.main-nav a:hover {
-  color: var(--accent);
-}
-
-.main-nav a:hover::after {
-  transform: scaleX(1);
-}
-
+/* Animated underline */
 .main-nav a::after {
   content: "";
   position: absolute;
   left: 0;
   right: 0;
   bottom: -0.2rem;
-  height: 1.5px;
+  height: 2px;
   background: var(--gold);
+
   transform: scaleX(0);
   transform-origin: center;
-  transition: transform 180ms ease;
+
+  transition: transform 220ms ease;
 }
 
 .main-nav a:hover {
-  color: var(--accent-dark);
+  color: var(--accent);
+  opacity: 1;
 }
 
 .main-nav a:hover::after {
   transform: scaleX(1);
 }
+
+/* Current page */
+.main-nav a[aria-current="page"] {
+  color: var(--accent);
+  opacity: 1;
+}
+
+.main-nav a[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+
+
+/* =========================
+   HERO
+   ========================= */
 
 .hero {
   display: grid;
@@ -277,7 +343,11 @@ p {
   padding: clamp(1.9rem, 2.5vw, 3.1rem);
   overflow: hidden;
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(244, 247, 246, 0.96));
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.9),
+      rgba(244, 247, 246, 0.96)
+    );
   border: 1px solid rgba(17, 157, 164, 0.1);
 }
 
@@ -333,6 +403,11 @@ p {
   color: var(--accent-dark);
 }
 
+
+/* =========================
+   HERO VISUAL
+   ========================= */
+
 .hero-visual {
   display: flex;
   flex-direction: column;
@@ -363,14 +438,22 @@ p {
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(19, 168, 190, 0.18), rgba(10, 95, 139, 0.1));
+  background: linear-gradient(
+    135deg,
+    rgba(19, 168, 190, 0.18),
+    rgba(10, 95, 139, 0.1)
+  );
   color: var(--accent-dark);
   font-size: 1.3rem;
   font-weight: 800;
 }
 
 .icon-circle.soft {
-  background: linear-gradient(135deg, rgba(19, 168, 190, 0.12), rgba(10, 95, 139, 0.16));
+  background: linear-gradient(
+    135deg,
+    rgba(19, 168, 190, 0.12),
+    rgba(10, 95, 139, 0.16)
+  );
 }
 
 .visual-card strong,
@@ -398,6 +481,11 @@ p {
   font-weight: 700;
   font-size: 0.82rem;
 }
+
+
+/* =========================
+   STATS
+   ========================= */
 
 .stats-strip {
   display: grid;
@@ -427,6 +515,11 @@ p {
   font-weight: 600;
 }
 
+
+/* =========================
+   SECTIONS
+   ========================= */
+
 .section {
   padding-top: 2.2rem;
 }
@@ -443,6 +536,11 @@ p {
   letter-spacing: -0.05em;
   max-width: 18ch;
 }
+
+
+/* =========================
+   SERVICE / PROCESS CARDS
+   ========================= */
 
 .service-grid,
 .process-grid {
@@ -467,7 +565,9 @@ p {
   border: 1px solid rgba(17, 157, 164, 0.1);
   border-radius: 18px;
   box-shadow: 0 12px 32px rgba(13, 51, 64, 0.05);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+  transition:
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s ease;
   border-top: 3px solid rgba(17, 157, 164, 0.35);
 }
 
@@ -503,11 +603,20 @@ p {
   width: 54px;
   height: 54px;
   border-radius: 16px;
-  background: linear-gradient(135deg, rgba(17, 157, 164, 0.14), rgba(41, 182, 175, 0.08));
+  background: linear-gradient(
+    135deg,
+    rgba(17, 157, 164, 0.14),
+    rgba(41, 182, 175, 0.08)
+  );
   color: var(--accent-dark);
   font-weight: 800;
   margin-bottom: 0.95rem;
 }
+
+
+/* =========================
+   FEATURE SPLIT
+   ========================= */
 
 .feature-split {
   display: grid;
@@ -543,6 +652,11 @@ p {
   left: 0;
   color: var(--accent-dark);
 }
+
+
+/* =========================
+   COVERAGE
+   ========================= */
 
 .coverage-grid {
   display: grid;
@@ -584,9 +698,19 @@ p {
   font-weight: 600;
 }
 
+
+/* =========================
+   TESTIMONIAL
+   ========================= */
+
 .testimonial {
   margin-top: 2.2rem;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(233, 240, 236, 0.95));
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.9),
+      rgba(233, 240, 236, 0.95)
+    );
   border-left: 4px solid var(--accent);
   border-radius: 18px;
 }
@@ -606,13 +730,23 @@ p {
   color: var(--muted);
 }
 
+
+/* =========================
+   CTA
+   ========================= */
+
 .cta-banner {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
   margin-top: 2.2rem;
-  background: linear-gradient(135deg, rgba(255,255,255,0.96), rgba(245, 239, 232, 0.96));
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.96),
+      rgba(245, 239, 232, 0.96)
+    );
 }
 
 .cta-banner h2 {
@@ -620,6 +754,11 @@ p {
   font-size: clamp(2rem, 3vw, 2.7rem);
   line-height: 1.1;
 }
+
+
+/* =========================
+   FOOTER
+   ========================= */
 
 .site-footer {
   display: flex;
@@ -633,7 +772,34 @@ p {
 .site-footer a {
   text-decoration: none;
   font-weight: 700;
+  position: relative;
 }
+
+.site-footer a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.15rem;
+  height: 1.5px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 180ms ease;
+}
+
+.site-footer a:hover {
+  color: var(--accent);
+}
+
+.site-footer a:hover::after {
+  transform: scaleX(1);
+}
+
+
+/* =========================
+   CONTACT PAGE
+   ========================= */
 
 .contact-page-shell {
   padding-bottom: 2rem;
@@ -723,11 +889,39 @@ p {
   line-height: 1.5;
 }
 
+.disclosure-box {
+  padding: 0.9rem 1rem;
+  border-radius: 16px;
+  background: var(--gold-soft);
+  border: 1px solid rgba(185, 147, 99, 0.2);
+}
+
+.disclosure-box p {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.consent-row {
+  margin-top: 0.2rem;
+}
+
+.form-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .form-status {
   min-height: 1.2rem;
   color: var(--accent-dark);
   font-weight: 700;
 }
+
+
+/* =========================
+   RESPONSIVE - TABLET
+   ========================= */
 
 @media (max-width: 980px) {
   .hero,
@@ -762,6 +956,11 @@ p {
   }
 }
 
+
+/* =========================
+   RESPONSIVE - MOBILE
+   ========================= */
+
 @media (max-width: 760px) {
   .site-shell {
     padding-left: 12px;
@@ -779,17 +978,15 @@ p {
   .brand-mark {
     width: 100%;
     max-width: 360px;
-    margin: 0 auto;
+    margin: 0 auto 4px;
     line-height: 0;
-    margin-top: 0;
-    margin-bottom: 4px;
   }
 
   .brand-mark img {
     width: min(100%, 260px);
     max-width: 260px;
     margin: 0;
-    transform: translateY(0);
+    transform: none;
   }
 
   .main-nav {
@@ -801,6 +998,10 @@ p {
   .main-nav a {
     letter-spacing: 0.12em;
     font-size: 0.56rem;
+  }
+
+  .main-nav a::after {
+    bottom: -0.18rem;
   }
 
   .hero,
@@ -849,8 +1050,49 @@ p {
     margin-left: 0;
   }
 
+  .contact-hero {
+    padding: 1.3rem 1.1rem;
+  }
+
+  .contact-hero h1 {
+    font-size: clamp(2.7rem, 12vw, 4rem);
+  }
+
+  .contact-form,
+  .contact-details {
+    padding: 1.2rem;
+  }
+
+  .form-actions {
+    width: 100%;
+  }
+
+  .form-actions .button,
+  .form-actions button {
+    width: 100%;
+  }
+
   .site-footer {
     flex-direction: column;
     align-items: flex-start;
+  }
+}
+
+
+/* =========================
+   REDUCED MOTION
+   ========================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
   }
 }
