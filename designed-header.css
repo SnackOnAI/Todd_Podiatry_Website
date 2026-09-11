@@ -1,0 +1,527 @@
+/* =========================================================
+   TODD PODIATRY DESIGNED HEADER
+   Desktop: generated artwork with real HTML links over it.
+   Mobile: responsive translation using the same branding.
+   ========================================================= */
+.designed-site-header {
+  width: 100%;
+  margin: 0 0 1.4rem;
+}
+
+.designed-header-art {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  border-radius: 0;
+}
+
+.designed-header-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: none;
+}
+
+.designed-header-nav {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.nav-hotspot {
+  position: absolute;
+  display: block;
+  pointer-events: auto;
+  color: transparent;
+  text-decoration: none;
+  border-radius: 999px;
+  outline: none;
+  box-sizing: border-box;
+  background: transparent;
+  transition: background-color 180ms ease, box-shadow 180ms ease;
+}
+
+/* Navigation hit areas are aligned to the text printed in the artwork.
+   The hover treatment is deliberately contained inside each hit area. */
+.nav-services {
+  left: 31.02%;
+  top: 8.60%;
+  width: 7.20%;
+  height: 6.60%;
+}
+
+.nav-coverage {
+  left: 39.31%;
+  top: 8.60%;
+  width: 8.40%;
+  height: 6.60%;
+}
+
+.nav-process {
+  left: 48.81%;
+  top: 8.60%;
+  width: 10.00%;
+  height: 6.60%;
+}
+
+.nav-contact {
+  left: 59.92%;
+  top: 8.60%;
+  width: 7.20%;
+  height: 6.60%;
+}
+
+.nav-services:hover,
+.nav-services:focus-visible,
+.nav-coverage:hover,
+.nav-coverage:focus-visible,
+.nav-process:hover,
+.nav-process:focus-visible,
+.nav-contact:hover,
+.nav-contact:focus-visible {
+  background: rgba(17, 157, 164, 0.10);
+  box-shadow: inset 0 -2px 0 rgba(17, 157, 164, 0.72);
+}
+
+/* Call button: exact artwork bounds, with an inset hover treatment so it cannot
+   spill outside the turquoise button. */
+.nav-phone {
+  left: 73.17%;
+  top: 6.07%;
+  width: 22.73%;
+  height: 10.82%;
+  border-radius: 999px;
+}
+
+.nav-phone:hover,
+.nav-phone:focus-visible {
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 255, 255, 0.48),
+    0 5px 16px rgba(13, 51, 64, 0.12);
+}
+
+.nav-hotspot:active {
+  filter: brightness(0.98);
+}
+
+/* =========================================================
+   MOBILE TRANSLATION
+   Keep the desktop artwork intact, but translate its visual language
+   into a purpose-built mobile composition rather than shrinking it.
+   ========================================================= */
+.mobile-designed-header {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .designed-site-header {
+    margin: 0 -12px 1.15rem;
+    width: calc(100% + 24px);
+  }
+
+  .designed-header-art {
+    display: none;
+  }
+
+  .mobile-designed-header {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    padding: 14px 14px 18px;
+    background:
+      radial-gradient(circle at 88% 28%, rgba(41, 182, 175, 0.12), transparent 28%),
+      linear-gradient(180deg, #ffffff 0%, #f7fbfb 68%, #eef9fa 100%);
+    border: 0;
+    border-bottom: 1px solid rgba(17, 157, 164, 0.12);
+    border-radius: 0 0 28px 28px;
+    box-shadow: 0 14px 34px rgba(13, 51, 64, 0.09);
+  }
+
+  /* Soft decorative wave, echoing the desktop header's lower teal bands. */
+  .mobile-designed-header::after {
+    content: "";
+    position: absolute;
+    left: -12%;
+    right: -12%;
+    bottom: -48px;
+    height: 92px;
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    background: linear-gradient(180deg, rgba(41, 182, 175, 0.18), rgba(10, 95, 139, 0.16));
+    pointer-events: none;
+  }
+
+  .mobile-designed-logo {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 0 6px;
+  }
+
+  .mobile-designed-logo img {
+    display: block;
+    width: min(92vw, 355px);
+    max-height: 170px;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 9px 18px rgba(13, 51, 64, 0.07));
+  }
+
+  .mobile-designed-nav {
+    position: relative;
+    z-index: 3;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px 10px;
+    margin: 11px auto 0;
+    max-width: 440px;
+  }
+
+  .mobile-designed-nav a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    padding: 9px 12px;
+    border: 1px solid rgba(13, 51, 64, 0.10);
+    border-radius: 14px;
+    color: var(--text, #0d3340);
+    background: rgba(255, 255, 255, 0.82);
+    box-shadow: 0 5px 14px rgba(13, 51, 64, 0.035);
+    font-family: var(--font-body, "Inter", "Segoe UI", sans-serif);
+    font-size: clamp(0.94rem, 4vw, 1.04rem);
+    font-weight: 500;
+    letter-spacing: -0.012em;
+    line-height: 1.25;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 180ms ease, color 180ms ease, transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+  }
+
+  .mobile-designed-nav a:hover,
+  .mobile-designed-nav a:focus-visible {
+    color: #0d3340;
+    background: rgba(17, 157, 164, 0.10);
+    border-color: rgba(17, 157, 164, 0.34);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(17, 157, 164, 0.10);
+    outline: none;
+  }
+
+  .mobile-designed-call {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 50px;
+    margin: 9px auto 0;
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #119da4 0%, #29b6af 100%);
+    color: #fff;
+    font-family: var(--font-body, Inter, sans-serif);
+    font-size: clamp(0.82rem, 3.6vw, 0.96rem);
+    font-weight: 800;
+    text-decoration: none;
+    box-shadow: 0 11px 24px rgba(17, 157, 164, 0.24);
+    transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+  }
+
+  .mobile-designed-call::before {
+    content: "☎";
+    margin-right: 8px;
+    font-size: 1.05em;
+    line-height: 1;
+  }
+
+  .mobile-designed-call:hover,
+  .mobile-designed-call:focus-visible {
+    transform: translateY(-1px);
+    box-shadow: 0 14px 28px rgba(17, 157, 164, 0.30);
+    filter: brightness(1.03);
+    outline: none;
+  }
+
+  .mobile-designed-hero {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 10px;
+    margin: 16px 0 0;
+    padding: 20px 15px 10px;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.80);
+    border: 1px solid rgba(17, 157, 164, 0.11);
+    box-shadow: 0 10px 26px rgba(13, 51, 64, 0.06);
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .mobile-designed-hero .eyebrow {
+    margin: 0;
+    color: #119da4;
+    font-size: 0.62rem;
+    letter-spacing: 0.17em;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .mobile-designed-hero h1 {
+    margin: 0;
+    color: #0d3340;
+    font-family: var(--font-heading, Inter, sans-serif);
+    font-size: clamp(2.15rem, 10vw, 3.35rem);
+    line-height: 0.96;
+    letter-spacing: -0.06em;
+  }
+
+  .mobile-designed-hero h1 span {
+    display: block;
+    color: #119da4;
+  }
+
+  .mobile-designed-hero p {
+    margin: 0 auto;
+    max-width: 34ch;
+    color: #475569;
+    font-size: 0.91rem;
+    line-height: 1.6;
+  }
+
+  .mobile-designed-car {
+    display: block;
+    width: min(100%, 430px);
+    margin: 4px auto -2px;
+    height: auto;
+    filter: drop-shadow(0 9px 12px rgba(13, 51, 64, 0.08));
+  }
+}
+
+/* Contact page: keep the mobile header clean and let the contact content begin immediately. */
+@media (max-width: 760px) {
+  .contact-page-shell .mobile-designed-header {
+    padding-bottom: 14px;
+  }
+
+  .contact-page-shell .mobile-designed-hero {
+    display: none;
+  }
+
+  .contact-page-shell .mobile-designed-logo img {
+    max-height: 145px;
+  }
+
+  .contact-page-shell .mobile-designed-nav a {
+    font-size: clamp(0.94rem, 4vw, 1.02rem);
+    font-weight: 500;
+  }
+
+  .contact-page-shell .contact-hero {
+    margin-top: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mobile-designed-header {
+    padding-left: 11px;
+    padding-right: 11px;
+  }
+
+  .mobile-designed-logo img {
+    width: min(94vw, 330px);
+    max-height: 145px;
+  }
+
+  .mobile-designed-nav {
+    gap: 7px;
+  }
+
+  .mobile-designed-nav a {
+    min-height: 43px;
+    padding: 8px 8px;
+    font-size: 0.94rem;
+  }
+
+  .mobile-designed-hero {
+    margin-top: 14px;
+    padding: 16px 13px 13px;
+  }
+}
+
+@media (max-width: 360px) {
+  .mobile-designed-nav a {
+    font-size: 0.68rem;
+  }
+
+  .mobile-designed-call {
+    font-size: 0.78rem;
+  }
+
+  .mobile-designed-logo img {
+    max-height: 132px;
+  }
+}
+
+/* V12 mobile refinements: navigation matches the site's body typography. */
+@media (max-width: 760px) {
+  .mobile-designed-nav a {
+    font-family: var(--font-body, "Inter", "Segoe UI", sans-serif);
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.35;
+  }
+
+  .mobile-designed-hero .eyebrow {
+    text-align: center;
+    font-size: 0.72rem;
+    letter-spacing: 0.10em;
+    line-height: 1.45;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-transform: none;
+    font-weight: 700;
+  }
+
+  .mobile-designed-car {
+    width: min(100%, 430px);
+    margin: 6px auto 0;
+    filter: drop-shadow(0 9px 12px rgba(13, 51, 64, 0.08));
+  }
+}
+
+@media (max-width: 360px) {
+  .mobile-designed-nav a {
+    font-size: 0.96rem;
+  }
+  .mobile-designed-hero .eyebrow {
+    font-size: 0.68rem;
+  }
+}
+
+
+/* V13: mobile navigation and clean transparent car artwork */
+@media (max-width: 760px) {
+  .mobile-designed-nav a {
+    font-family: "Inter", "Segoe UI", sans-serif !important;
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0 !important;
+    line-height: 1.35 !important;
+    text-transform: uppercase !important;
+  }
+
+  .mobile-designed-call {
+    font-family: "Inter", "Segoe UI", sans-serif !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0 !important;
+    text-transform: uppercase !important;
+  }
+
+  .mobile-designed-hero .eyebrow {
+    display: block;
+    width: 100%;
+    max-width: 340px;
+    margin: 0 auto 2px !important;
+    padding: 0 4px;
+    text-align: center !important;
+    font-family: "Inter", "Segoe UI", sans-serif !important;
+    font-size: 0.78rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.055em !important;
+    line-height: 1.45 !important;
+    text-transform: none !important;
+  }
+
+  .mobile-designed-car {
+    display: block;
+    width: min(100%, 430px);
+    height: auto;
+    margin: 7px auto 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    filter: drop-shadow(0 8px 10px rgba(13, 51, 64, 0.07));
+  }
+}
+
+@media (max-width: 480px) {
+  .mobile-designed-nav a {
+    font-size: 0.98rem !important;
+  }
+  .mobile-designed-call {
+    font-size: 0.98rem !important;
+  }
+  .mobile-designed-hero .eyebrow {
+    max-width: 330px;
+    font-size: 0.76rem !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .mobile-designed-nav a {
+    font-size: 0.94rem !important;
+  }
+  .mobile-designed-call {
+    font-size: 0.94rem !important;
+  }
+  .mobile-designed-hero .eyebrow {
+    font-size: 0.72rem !important;
+  }
+}
+
+
+/* V13 final mobile polish */
+@media (max-width: 760px) {
+  .mobile-designed-nav {
+    font-family: "Inter", "Segoe UI", sans-serif !important;
+  }
+  .mobile-designed-nav a {
+    font-family: "Inter", "Segoe UI", sans-serif !important;
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0 !important;
+    text-transform: uppercase !important;
+    line-height: 1.25 !important;
+  }
+  .mobile-designed-call {
+    font-family: "Inter", "Segoe UI", sans-serif !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0 !important;
+    text-transform: uppercase !important;
+  }
+  .mobile-designed-hero .eyebrow {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 auto 4px !important;
+    padding: 0 2px !important;
+    text-align: center !important;
+    font-family: "Inter", "Segoe UI", sans-serif !important;
+    font-size: 0.76rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.045em !important;
+    line-height: 1.4 !important;
+    text-transform: none !important;
+  }
+  .mobile-designed-car {
+    content: url("mobile-car-transparent-v13.png");
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    width: min(100%, 430px) !important;
+    margin: 8px auto 0 !important;
+  }
+}
+@media (max-width: 360px) {
+  .mobile-designed-nav a { font-size: 0.94rem !important; }
+  .mobile-designed-call { font-size: 0.94rem !important; }
+  .mobile-designed-hero .eyebrow { font-size: 0.70rem !important; letter-spacing: 0.03em !important; }
+}
