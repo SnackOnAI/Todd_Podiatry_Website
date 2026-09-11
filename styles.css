@@ -245,6 +245,10 @@ p {
   color: var(--accent);
 }
 
+.main-nav a:hover::after {
+  transform: scaleX(1);
+}
+
 .main-nav a::after {
   content: "";
   position: absolute;
